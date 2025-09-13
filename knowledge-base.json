@@ -1,0 +1,104 @@
+{
+  "emergency_protocols": {
+    "fire": {
+      "immediate_actions": [
+        "Exit building immediately using nearest safe exit",
+        "Stay low to avoid smoke inhalation",
+        "Call 911 immediately",
+        "Close doors behind you to slow fire spread",
+        "Never use elevators - use stairs only"
+      ],
+      "trapped_scenarios": {
+        "high_floor": [
+          "Signal for help from window",
+          "Seal door cracks with wet cloth",
+          "Stay low where air is cleaner",
+          "If window accessible, prepare for rescue"
+        ],
+        "blocked_exit": [
+          "Find alternate exit route",
+          "Break window if ground floor and safe",
+          "Create barrier between you and fire",
+          "Call 911 and report your exact location"
+        ]
+      },
+      "suppression": {
+        "small_fires": "Use water, foam, or fire extinguisher",
+        "electrical_fires": "Never use water - use CO2 or dry chemical extinguisher",
+        "grease_fires": "Never use water - smother with lid or use foam",
+        "chemical_fires": "Evacuate immediately - call hazmat team"
+      }
+    },
+    "medical": {
+      "critical_assessment": [
+        "Check consciousness - tap shoulders, shout 'Are you okay?'",
+        "Check breathing - look for chest movement",
+        "Check pulse - wrist or neck",
+        "Call 911 immediately if unconscious or not breathing"
+      ],
+      "bleeding_control": [
+        "Apply direct pressure with clean cloth",
+        "Elevate injured area above heart if possible",
+        "Apply pressure to pressure points if needed",
+        "Never remove embedded objects"
+      ],
+      "cpr_steps": [
+        "Place heel of hand on center of chest",
+        "30 chest compressions - push hard and fast",
+        "2 rescue breaths - tilt head, lift chin",
+        "Continue cycles until help arrives"
+      ],
+      "burns": [
+        "Cool with running water for 10+ minutes",
+        "Cover with clean, dry cloth",
+        "Never use ice, butter, or ointments",
+        "Seek medical attention for serious burns"
+      ]
+    },
+    "police": {
+      "personal_safety": [
+        "Get to safe location immediately",
+        "Call 911 - provide exact location",
+        "Do not confront dangerous individuals",
+        "Preserve evidence - don't touch anything"
+      ],
+      "active_threat": [
+        "Run - get away from threat if possible",
+        "Hide - find secure location, lock doors",
+        "Fight - only as last resort",
+        "Call 911 when safe to do so"
+      ],
+      "domestic_violence": [
+        "Safety first - get to safe location",
+        "Call 911 or domestic violence hotline",
+        "Document injuries with photos if safe",
+        "Contact trusted friends or family"
+      ],
+      "suspicious_activity": [
+        "Observe from safe distance",
+        "Note descriptions - height, clothing, direction",
+        "Call police non-emergency or 911",
+        "Do not approach or investigate yourself"
+      ]
+    }
+  },
+  "keywords": {
+    "fire_indicators": [
+      "smoke", "fire", "flames", "burning", "heat", "evacuation", 
+      "trapped", "smoke alarm", "fire alarm", "exit blocked"
+    ],
+    "medical_indicators": [
+      "unconscious", "bleeding", "chest pain", "difficulty breathing",
+      "heart attack", "stroke", "choking", "severe injury", "overdose"
+    ],
+    "police_indicators": [
+      "assault", "robbery", "break in", "suspicious person",
+      "domestic violence", "threat", "weapon", "harassment"
+    ],
+    "urgency_levels": {
+      "critical": ["dying", "unconscious", "massive bleeding", "can't breathe"],
+      "urgent": ["severe pain", "trapped", "threatened", "injured"],
+      "important": ["suspicious", "worried", "concerned", "need help"]
+    }
+  }
+}

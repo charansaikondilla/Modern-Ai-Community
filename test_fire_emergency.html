@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Fire Emergency Detection</title>
+</head>
+<body>
+    <h1>Test Fire Emergency Detection</h1>
+    <button onclick="testFireEmergency()">Test Fire Emergency</button>
+    <div id="result"></div>
+
+    <script>
+        async function testFireEmergency() {
+            console.log('🔥 Testing fire emergency detection...');
+            
+            const context = {
+                mode: 'personal',
+                user: {
+                    name: 'Test User',
+                    role: 'member',
+                    location: 'Test Location'
+                },
+                emergencyActive: true,  // Backend expects this field name
+                userMessage: 'fire',    // Backend expects this field name
+                trigger: 'emergency_triggered',  // Add trigger for emergency detection
+                message: 'fire'         // Keep for compatibility
+            };
+
+            try {
+                const response = await fetch('/api/ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(context)
+                });
+
+                const data = await response.json();
+                console.log('🤖 AI Response:', data);
+                
+                document.getElementById('result').innerHTML = `
+                    <h3>Response:</h3>
+                    <p><strong>Message:</strong> ${data.message || data.response}</p>
+                    <p><strong>Mode:</strong> ${data.mode}</p>
+                    <p><strong>Service:</strong> ${data.service}</p>
+                    <p><strong>Safety Included:</strong> ${data.safetyIncluded}</p>
+                `;
+            } catch (error) {
+                console.error('❌ Error testing fire emergency:', error);
+                document.getElementById('result').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinator Test</title>
+</head>
+<body>
+    <h1>🧪 Coordinator API Test</h1>
+    <button onclick="testCoordinator()">Test Fire Emergency</button>
+    <button onclick="testChat()">Test Normal Chat</button>
+    <div id="output"></div>
+
+    <script>
+        async function testCoordinator() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<p>🔄 Testing coordinator...</p>';
+            
+            try {
+                const response = await fetch('/api/coordinator', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userMessage: '/fire Help! There is a fire on the 9th floor and the door is locked',
+                        userID: 'browser_test_user',
+                        location: 'Building A, 9th floor',
+                        details: { situation: 'locked_door' }
+                    })
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Response data:', data);
+                
+                output.innerHTML = `
+                    <h3>✅ Success!</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                output.innerHTML = `
+                    <h3>❌ Error</h3>
+                    <p>${error.message}</p>
+                `;
+            }
+        }
+
+        async function testChat() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<p>🔄 Testing chat...</p>';
+            
+            try {
+                const response = await fetch('/api/coordinator', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userMessage: 'Hello, how are you?',
+                        userID: 'browser_chat_user',
+                        location: 'Test location'
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                output.innerHTML = `
+                    <h3>✅ Chat Success!</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error('Chat Error:', error);
+                output.innerHTML = `
+                    <h3>❌ Chat Error</h3>
+                    <p>${error.message}</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Debug Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background: #e8f5e8; border-color: #4caf50; }
+        .error { background: #ffebee; border-color: #f44336; }
+        .info { background: #e3f2fd; border-color: #2196f3; }
+        button { padding: 10px 20px; margin: 5px; background: #2196f3; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #1976d2; }
+        .log { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; font-family: monospace; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
+        .status { display: inline-block; padding: 5px 10px; border-radius: 15px; color: white; font-weight: bold; }
+        .online { background: #4caf50; }
+        .offline { background: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 AI System Debug Dashboard</h1>
+        <p>This page will diagnose exactly why your AI is not responding.</p>
+
+        <div class="test-section info">
+            <h3>📡 Server Status</h3>
+            <p>Server: <span id="serverStatus" class="status offline">Checking...</span></p>
+            <p>AI Endpoint: <span id="aiStatus" class="status offline">Checking...</span></p>
+            <button onclick="checkServer()">🔄 Check Server</button>
+        </div>
+
+        <div class="test-section">
+            <h3>🤖 AI API Test</h3>
+            <button onclick="testAI()">🧪 Test AI</button>
+            <div id="aiResults" class="log">Click test button to check AI...</div>
+        </div>
+
+        <div class="test-section">
+            <h3>📊 Debug Log</h3>
+            <div id="debugLog" class="log">Debug information will appear here...</div>
+            <button onclick="clearLog()">🗑️ Clear</button>
+        </div>
+    </div>
+
+    <script>
+        function log(message) {
+            const debugLog = document.getElementById('debugLog');
+            const timestamp = new Date().toLocaleTimeString();
+            debugLog.textContent += '[' + timestamp + '] ' + message + '\n';
+            debugLog.scrollTop = debugLog.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('debugLog').textContent = '';
+        }
+
+        async function checkServer() {
+            log('Checking server status...');
+            
+            try {
+                const response = await fetch('/api/ai/health');
+                const serverEl = document.getElementById('serverStatus');
+                const aiEl = document.getElementById('aiStatus');
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    serverEl.textContent = 'Online';
+                    serverEl.className = 'status online';
+                    aiEl.textContent = 'Online';
+                    aiEl.className = 'status online';
+                    log('✅ Server is online: ' + JSON.stringify(data));
+                } else {
+                    serverEl.textContent = 'Error';
+                    serverEl.className = 'status offline';
+                    aiEl.textContent = 'Error';
+                    aiEl.className = 'status offline';
+                    log('❌ Server error: ' + response.status);
+                }
+            } catch (error) {
+                log('❌ Server check failed: ' + error.message);
+                document.getElementById('serverStatus').textContent = 'Offline';
+                document.getElementById('aiStatus').textContent = 'Offline';
+            }
+        }
+
+        async function testAI() {
+            log('Testing AI API...');
+            const resultsDiv = document.getElementById('aiResults');
+            
+            try {
+                const testData = {
+                    mode: 'personal',
+                    user: {
+                        name: 'Debug User',
+                        role: 'member',
+                        location: 'Test Location'
+                    },
+                    message: 'Hello AI, please respond with emergency information',
+                    isEmergency: false
+                };
+
+                log('Sending AI request...');
+                
+                const response = await fetch('/api/ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                log('AI Response status: ' + response.status);
+                
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status + ': ' + response.statusText);
+                }
+
+                const data = await response.json();
+                log('✅ AI Response received');
+                
+                const resultText = '✅ AI API SUCCESS!\n\n' +
+                    'Status: ' + response.status + '\n' +
+                    'Response Field: ' + (data.response ? 'Present' : 'Missing') + '\n' +
+                    'Message Field: ' + (data.message ? 'Present' : 'Missing') + '\n' +
+                    'Service: ' + (data.service || 'Not specified') + '\n' +
+                    'Mode: ' + (data.mode || 'Not specified') + '\n\n' +
+                    'AI Content:\n' + (data.response || data.message || 'No content') + '\n\n' +
+                    'Full Response:\n' + JSON.stringify(data, null, 2);
+                
+                resultsDiv.textContent = resultText;
+                
+            } catch (error) {
+                log('❌ AI test failed: ' + error.message);
+                resultsDiv.textContent = '❌ AI API FAILED!\n\nError: ' + error.message + '\n\nThis indicates a connection or server issue.\nCheck if the server is running on port 3006.';
+            }
+        }
+
+        // Auto-run initial checks
+        setTimeout(function() {
+            log('🚀 Starting diagnostics...');
+            checkServer();
+        }, 1000);
+    </script>
+</body>
+</html>

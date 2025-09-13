@@ -1,0 +1,751 @@
+{
+  "metadata": {
+    "appName": "Modern Community",
+    "version": "1.0.0",
+    "description": "Emergency chat platform prototype",
+    "lastUpdated": "2025-08-28T16:19:53.871162",
+    "author": "Modern Community Team"
+  },
+  "users": [
+    {
+      "id": "user_001",
+      "name": "Priya",
+      "age": 28,
+      "gender": "Female",
+      "bloodGroup": "B+",
+      "medicalConditions": [
+        "Diabetes"
+      ],
+      "role": "Member",
+      "isOnline": true,
+      "lastSeen": "2025-08-28T16:18:42.999467",
+      "avatar": "https://i.pravatar.cc/150?img=1",
+      "emergencyContacts": [
+        {
+          "name": "Mom",
+          "phone": "+91-9876543210",
+          "relation": "Mother"
+        },
+        {
+          "name": "Ravi",
+          "phone": "+91-9876543211",
+          "relation": "Brother"
+        }
+      ],
+      "location": {
+        "address": "Sector 4, East Zone",
+        "coordinates": {
+          "lat": 17.4472,
+          "lng": 78.3731
+        }
+      },
+      "communities": [
+        "city_central",
+        "east_zone",
+        "sector_4"
+      ]
+    },
+    {
+      "id": "user_002",
+      "name": "Rahul",
+      "age": 32,
+      "gender": "Male",
+      "bloodGroup": "A+",
+      "medicalConditions": [],
+      "role": "Member",
+      "isOnline": false,
+      "lastSeen": "2025-08-28T14:18:42.999494",
+      "avatar": "https://i.pravatar.cc/150?img=2",
+      "emergencyContacts": [
+        {
+          "name": "Priya",
+          "phone": "+91-9876543212",
+          "relation": "Wife"
+        },
+        {
+          "name": "Dad",
+          "phone": "+91-9876543213",
+          "relation": "Father"
+        }
+      ],
+      "location": {
+        "address": "Sector 3, East Zone",
+        "coordinates": {
+          "lat": 17.4462,
+          "lng": 78.3721
+        }
+      },
+      "communities": [
+        "city_central",
+        "east_zone",
+        "sector_3"
+      ]
+    },
+    {
+      "id": "user_003",
+      "name": "Officer Anil",
+      "age": 45,
+      "gender": "Male",
+      "bloodGroup": "O+",
+      "medicalConditions": [],
+      "role": "Responder",
+      "responderType": "Police",
+      "isOnline": true,
+      "lastSeen": "2025-08-28T16:18:42.999516",
+      "avatar": "https://i.pravatar.cc/150?img=3",
+      "emergencyContacts": [
+        {
+          "name": "Station",
+          "phone": "+91-100",
+          "relation": "Work"
+        },
+        {
+          "name": "Wife",
+          "phone": "+91-9876543214",
+          "relation": "Spouse"
+        }
+      ],
+      "location": {
+        "address": "Police Station, East Zone",
+        "coordinates": {
+          "lat": 17.4482,
+          "lng": 78.3741
+        }
+      },
+      "communities": [
+        "city_central",
+        "east_zone",
+        "police_community"
+      ],
+      "responseTime": "6 min",
+      "badgeNumber": "PO2025"
+    },
+    {
+      "id": "user_004",
+      "name": "Dr. Meera",
+      "age": 38,
+      "gender": "Female",
+      "bloodGroup": "AB+",
+      "medicalConditions": [],
+      "role": "Responder",
+      "responderType": "Doctor",
+      "isOnline": true,
+      "lastSeen": "2025-08-28T16:18:42.999525",
+      "avatar": "https://i.pravatar.cc/150?img=4",
+      "emergencyContacts": [
+        {
+          "name": "Hospital",
+          "phone": "+91-108",
+          "relation": "Work"
+        },
+        {
+          "name": "Husband",
+          "phone": "+91-9876543215",
+          "relation": "Spouse"
+        }
+      ],
+      "location": {
+        "address": "City Hospital, Central",
+        "coordinates": {
+          "lat": 17.4492,
+          "lng": 78.3751
+        }
+      },
+      "communities": [
+        "city_central",
+        "doctors_community"
+      ],
+      "responseTime": "8 min",
+      "specialization": "Emergency Medicine"
+    },
+    {
+      "id": "user_005",
+      "name": "Fireman Raj",
+      "age": 35,
+      "gender": "Male",
+      "bloodGroup": "O-",
+      "medicalConditions": [],
+      "role": "Responder",
+      "responderType": "Fire",
+      "isOnline": true,
+      "lastSeen": "2025-08-28T16:18:42.999534",
+      "avatar": "https://i.pravatar.cc/150?img=5",
+      "emergencyContacts": [
+        {
+          "name": "Fire Station",
+          "phone": "+91-101",
+          "relation": "Work"
+        },
+        {
+          "name": "Mom",
+          "phone": "+91-9876543216",
+          "relation": "Mother"
+        }
+      ],
+      "location": {
+        "address": "Fire Station, East Zone",
+        "coordinates": {
+          "lat": 17.4502,
+          "lng": 78.3761
+        }
+      },
+      "communities": [
+        "city_central",
+        "east_zone",
+        "fire_response_team"
+      ],
+      "responseTime": "5 min",
+      "vehicleNumber": "FR-01"
+    },
+    {
+      "id": "user_006",
+      "name": "Sara",
+      "age": 26,
+      "gender": "Female",
+      "bloodGroup": "A-",
+      "medicalConditions": [
+        "Asthma"
+      ],
+      "role": "Member",
+      "isOnline": true,
+      "lastSeen": "2025-08-28T16:18:42.999541",
+      "avatar": "https://i.pravatar.cc/150?img=6",
+      "emergencyContacts": [
+        {
+          "name": "Sister",
+          "phone": "+91-9876543217",
+          "relation": "Sister"
+        },
+        {
+          "name": "Roommate",
+          "phone": "+91-9876543218",
+          "relation": "Friend"
+        }
+      ],
+      "location": {
+        "address": "Sector 5, East Zone",
+        "coordinates": {
+          "lat": 17.4512,
+          "lng": 78.3771
+        }
+      },
+      "communities": [
+        "city_central",
+        "east_zone",
+        "sector_5"
+      ]
+    },
+    {
+      "id": "user_007",
+      "name": "Elder Ramu",
+      "age": 72,
+      "gender": "Male",
+      "bloodGroup": "B-",
+      "medicalConditions": [
+        "Hypertension",
+        "Arthritis"
+      ],
+      "role": "Elder",
+      "isOnline": false,
+      "lastSeen": "2025-08-28T12:18:42.999549",
+      "avatar": "https://i.pravatar.cc/150?img=7",
+      "emergencyContacts": [
+        {
+          "name": "Son",
+          "phone": "+91-9876543219",
+          "relation": "Son"
+        },
+        {
+          "name": "Neighbor",
+          "phone": "+91-9876543220",
+          "relation": "Neighbor"
+        }
+      ],
+      "location": {
+        "address": "Sector 4, East Zone",
+        "coordinates": {
+          "lat": 17.4522,
+          "lng": 78.3781
+        }
+      },
+      "communities": [
+        "city_central",
+        "east_zone",
+        "sector_4",
+        "senior_support_volunteers"
+      ]
+    }
+  ],
+  "communities": {
+    "main_communities": [
+      {
+        "id": "city_central",
+        "name": "City Central",
+        "type": "main",
+        "description": "Main city community for all residents",
+        "isLocked": false,
+        "icon": "🏙️",
+        "memberCount": 7,
+        "subCommunities": [
+          "east_zone",
+          "west_zone",
+          "north_zone"
+        ],
+        "roles": [
+          "Admin",
+          "Responder",
+          "Member",
+          "Elder",
+          "NGO"
+        ]
+      }
+    ],
+    "sub_communities": [
+      {
+        "id": "east_zone",
+        "name": "East Zone",
+        "type": "sub",
+        "parentId": "city_central",
+        "description": "Eastern residential zone",
+        "isLocked": false,
+        "icon": "🏘️",
+        "memberCount": 6,
+        "subCommunities": [
+          "sector_3",
+          "sector_4",
+          "sector_5"
+        ],
+        "roles": [
+          "Admin",
+          "Responder",
+          "Member",
+          "Elder"
+        ]
+      },
+      {
+        "id": "west_zone",
+        "name": "West Zone",
+        "type": "sub",
+        "parentId": "city_central",
+        "description": "Western commercial zone",
+        "isLocked": false,
+        "icon": "🏢",
+        "memberCount": 0,
+        "subCommunities": [
+          "sector_1",
+          "sector_2"
+        ],
+        "roles": [
+          "Admin",
+          "Responder",
+          "Member",
+          "Elder"
+        ]
+      }
+    ],
+    "sub_sub_communities": [
+      {
+        "id": "sector_3",
+        "name": "Sector 3",
+        "type": "sub-sub",
+        "parentId": "east_zone",
+        "description": "Residential Sector 3",
+        "isLocked": false,
+        "icon": "🏠",
+        "memberCount": 1,
+        "roles": [
+          "Admin",
+          "Member",
+          "Elder"
+        ]
+      },
+      {
+        "id": "sector_4",
+        "name": "Sector 4",
+        "type": "sub-sub",
+        "parentId": "east_zone",
+        "description": "Residential Sector 4",
+        "isLocked": false,
+        "icon": "🏠",
+        "memberCount": 2,
+        "roles": [
+          "Admin",
+          "Member",
+          "Elder"
+        ]
+      },
+      {
+        "id": "sector_5",
+        "name": "Sector 5",
+        "type": "sub-sub",
+        "parentId": "east_zone",
+        "description": "Residential Sector 5",
+        "isLocked": false,
+        "icon": "🏠",
+        "memberCount": 1,
+        "roles": [
+          "Admin",
+          "Member",
+          "Elder"
+        ]
+      }
+    ],
+    "emergency_communities": [
+      {
+        "id": "police_community",
+        "name": "Police Community",
+        "type": "emergency",
+        "description": "Emergency police response team",
+        "isLocked": true,
+        "icon": "👮‍♂️",
+        "triggerTypes": [
+          "rape",
+          "missing"
+        ],
+        "memberCount": 1,
+        "roles": [
+          "Responder"
+        ],
+        "unlockCondition": "Emergency alert triggered"
+      },
+      {
+        "id": "doctors_community",
+        "name": "Doctors Community",
+        "type": "emergency",
+        "description": "Medical emergency response",
+        "isLocked": true,
+        "icon": "👩‍⚕️",
+        "triggerTypes": [
+          "doctor",
+          "medical"
+        ],
+        "memberCount": 1,
+        "roles": [
+          "Responder"
+        ],
+        "unlockCondition": "Medical emergency triggered"
+      },
+      {
+        "id": "fire_response_team",
+        "name": "Fire Response Team",
+        "type": "emergency",
+        "description": "Fire and accident response",
+        "isLocked": true,
+        "icon": "🚒",
+        "triggerTypes": [
+          "fire",
+          "accident"
+        ],
+        "memberCount": 1,
+        "roles": [
+          "Responder"
+        ],
+        "unlockCondition": "Fire/accident emergency triggered"
+      },
+      {
+        "id": "disaster_response_unit",
+        "name": "Disaster Response Unit",
+        "type": "emergency",
+        "description": "Natural disaster management",
+        "isLocked": true,
+        "icon": "🚨",
+        "triggerTypes": [
+          "disaster"
+        ],
+        "memberCount": 0,
+        "roles": [
+          "Responder",
+          "NGO"
+        ],
+        "unlockCondition": "Disaster alert triggered"
+      },
+      {
+        "id": "senior_support_volunteers",
+        "name": "Senior Support Volunteers",
+        "type": "emergency",
+        "description": "Elderly help and support",
+        "isLocked": true,
+        "icon": "🧓",
+        "triggerTypes": [
+          "helpelder"
+        ],
+        "memberCount": 1,
+        "roles": [
+          "Responder",
+          "NGO"
+        ],
+        "unlockCondition": "Elder help requested"
+      },
+      {
+        "id": "ngo_helpers",
+        "name": "NGO / Helper Groups",
+        "type": "emergency",
+        "description": "Emergency fund and general help",
+        "isLocked": true,
+        "icon": "🤝",
+        "triggerTypes": [
+          "fund"
+        ],
+        "memberCount": 0,
+        "roles": [
+          "NGO",
+          "Responder"
+        ],
+        "unlockCondition": "Emergency fund requested"
+      }
+    ]
+  },
+  "emergencyTriggers": {
+    "/rape": {
+      "alertType": "Rape",
+      "urgencyLevel": "Critical",
+      "unlocksCommunity": "police_community",
+      "systemMessage": "🚨 CRITICAL: Rape emergency triggered",
+      "responderTypes": [
+        "Police"
+      ],
+      "broadcastToAll": true,
+      "color": "#FF0000",
+      "sound": "emergency_siren.mp3"
+    },
+    "/fire": {
+      "alertType": "Fire",
+      "urgencyLevel": "High",
+      "unlocksCommunity": "fire_response_team",
+      "systemMessage": "🔥 FIRE EMERGENCY: Immediate response needed",
+      "responderTypes": [
+        "Fire"
+      ],
+      "broadcastToAll": true,
+      "color": "#FF4500",
+      "sound": "fire_alarm.mp3"
+    },
+    "/blood": {
+      "alertType": "Blood Needed",
+      "urgencyLevel": "High",
+      "unlocksCommunity": "doctors_community",
+      "systemMessage": "🩸 URGENT: Blood donation needed",
+      "responderTypes": [
+        "Doctor"
+      ],
+      "broadcastToAll": true,
+      "color": "#DC143C",
+      "sound": "medical_alert.mp3"
+    },
+    "/missing": {
+      "alertType": "Missing Person",
+      "urgencyLevel": "High",
+      "unlocksCommunity": "police_community",
+      "systemMessage": "🔍 MISSING PERSON: Search assistance needed",
+      "responderTypes": [
+        "Police"
+      ],
+      "broadcastToAll": true,
+      "color": "#FF6347",
+      "sound": "alert_beep.mp3"
+    },
+    "/doctor": {
+      "alertType": "Medical Help",
+      "urgencyLevel": "High",
+      "unlocksCommunity": "doctors_community",
+      "systemMessage": "⚕️ MEDICAL EMERGENCY: Doctor needed urgently",
+      "responderTypes": [
+        "Doctor"
+      ],
+      "broadcastToAll": false,
+      "color": "#00CED1",
+      "sound": "medical_alert.mp3"
+    },
+    "/fund": {
+      "alertType": "Emergency Fund",
+      "urgencyLevel": "Medium",
+      "unlocksCommunity": "ngo_helpers",
+      "systemMessage": "💰 FINANCIAL AID: Emergency fund requested",
+      "responderTypes": [
+        "NGO"
+      ],
+      "broadcastToAll": false,
+      "color": "#32CD32",
+      "sound": "notification_chime.mp3"
+    },
+    "/disaster": {
+      "alertType": "Natural Disaster",
+      "urgencyLevel": "Critical",
+      "unlocksCommunity": "disaster_response_unit",
+      "systemMessage": "🌪️ DISASTER ALERT: Natural disaster response activated",
+      "responderTypes": [
+        "Responder",
+        "NGO"
+      ],
+      "broadcastToAll": true,
+      "color": "#8B0000",
+      "sound": "disaster_siren.mp3"
+    },
+    "/helpelder": {
+      "alertType": "Elderly Help",
+      "urgencyLevel": "Medium",
+      "unlocksCommunity": "senior_support_volunteers",
+      "systemMessage": "🧓 ELDERLY ALERT: Senior citizen needs assistance",
+      "responderTypes": [
+        "Responder",
+        "NGO"
+      ],
+      "broadcastToAll": false,
+      "color": "#DAA520",
+      "sound": "gentle_alert.mp3"
+    }
+  },
+  "mockChats": [
+    {
+      "id": "chat_001",
+      "communityId": "city_central",
+      "messages": [
+        {
+          "id": "msg_001",
+          "senderId": "user_002",
+          "senderName": "Rahul",
+          "content": "Good morning everyone! Hope everyone is doing well.",
+          "timestamp": "2025-08-28T14:19:23.196511",
+          "type": "text",
+          "isSystemMessage": false
+        },
+        {
+          "id": "msg_002",
+          "senderId": "user_001",
+          "senderName": "Priya",
+          "content": "Morning Rahul! Yes, all good here in Sector 4.",
+          "timestamp": "2025-08-28T14:49:23.196540",
+          "type": "text",
+          "isSystemMessage": false
+        }
+      ]
+    },
+    {
+      "id": "chat_002",
+      "communityId": "east_zone",
+      "messages": [
+        {
+          "id": "msg_003",
+          "senderId": "user_006",
+          "senderName": "Sara",
+          "content": "Has anyone seen the new community guidelines?",
+          "timestamp": "2025-08-28T15:34:23.196550",
+          "type": "text",
+          "isSystemMessage": false
+        }
+      ]
+    }
+  ],
+  "emergencyCases": [
+    {
+      "caseId": "R-2025-08-0021",
+      "alertType": "Rape",
+      "userId": "user_001",
+      "userName": "Priya",
+      "location": "Sector 4, East Zone",
+      "triggerTime": "2025-08-28T13:19:39.122818",
+      "status": "Resolved",
+      "responder": {
+        "id": "user_003",
+        "name": "Officer Anil",
+        "acceptTime": "2025-08-28T13:20:39.122837",
+        "eta": "6 min",
+        "arrivalTime": "2025-08-28T13:26:39.122842"
+      },
+      "emergencyContactsNotified": [
+        {
+          "name": "Mom",
+          "phone": "+91-9876543210"
+        },
+        {
+          "name": "Ravi",
+          "phone": "+91-9876543211"
+        }
+      ],
+      "resolutionTime": "2025-08-28T13:49:39.122847",
+      "notes": "Case resolved successfully. Support provided."
+    },
+    {
+      "caseId": "F-2025-08-0022",
+      "alertType": "Fire",
+      "userId": "user_002",
+      "userName": "Rahul",
+      "location": "Sector 3, East Zone",
+      "triggerTime": "2025-08-28T15:19:39.122853",
+      "status": "In Progress",
+      "responder": {
+        "id": "user_005",
+        "name": "Fireman Raj",
+        "acceptTime": "2025-08-28T15:21:39.122856",
+        "eta": "5 min",
+        "arrivalTime": "2025-08-28T15:26:39.122860"
+      },
+      "emergencyContactsNotified": [
+        {
+          "name": "Priya",
+          "phone": "+91-9876543212"
+        },
+        {
+          "name": "Dad",
+          "phone": "+91-9876543213"
+        }
+      ],
+      "resolutionTime": null,
+      "notes": "Fire department on scene. Evacuation in progress."
+    }
+  ],
+  "appState": {
+    "currentUser": {
+      "id": "user_001",
+      "isLoggedIn": true
+    },
+    "ui": {
+      "currentView": "chat",
+      "activeCommunity": "city_central",
+      "sidebarExpanded": true,
+      "emergencyPopupVisible": false,
+      "darkMode": false
+    },
+    "notifications": {
+      "unreadCount": 3,
+      "emergencyAlerts": 1,
+      "messageNotifications": 2
+    },
+    "sounds": {
+      "enabled": true,
+      "volume": 0.7,
+      "emergencyVolume": 1.0
+    }
+  },
+  "uiConfig": {
+    "theme": {
+      "primary": "#25D366",
+      "secondary": "#128C7E",
+      "emergency": "#FF3B30",
+      "warning": "#FF9500",
+      "success": "#34C759",
+      "background": "#FFFFFF",
+      "surface": "#F2F2F2",
+      "text": "#000000",
+      "textSecondary": "#666666"
+    },
+    "sounds": {
+      "messageSent": "message_send.mp3",
+      "messageReceived": "message_receive.mp3",
+      "emergencySiren": "emergency_siren.mp3",
+      "fireAlarm": "fire_alarm.mp3",
+      "medicalAlert": "medical_alert.mp3",
+      "alertBeep": "alert_beep.mp3",
+      "notificationChime": "notification_chime.mp3",
+      "disasterSiren": "disaster_siren.mp3",
+      "gentleAlert": "gentle_alert.mp3"
+    },
+    "layout": {
+      "sidebarWidth": 320,
+      "chatHeaderHeight": 60,
+      "messageInputHeight": 60,
+      "emergencyPopupWidth": 400,
+      "emergencyPopupHeight": 300
+    }
+  }
+}

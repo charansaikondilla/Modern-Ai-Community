@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Test Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-container { max-width: 600px; margin: 0 auto; }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px 0; }
+        .response { background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 AI API Test Page</h1>
+        <p>This page will test your AI API directly without the main app complexity.</p>
+        
+        <button onclick="testAI()">🤖 Test AI: "give me about emergencies response"</button>
+        <button onclick="testAI2()">🚨 Test AI: "What should I do in a fire emergency?"</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function testAI() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="response">🔄 Testing AI...</div>';
+            
+            try {
+                const response = await fetch('/api/ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        mode: 'personal',
+                        user: {
+                            name: 'Test User',
+                            role: 'member',
+                            location: 'Test Location'
+                        },
+                        message: 'give me about emergencies response',
+                        isEmergency: false
+                    })
+                });
+                
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('AI Response:', data);
+                
+                resultsDiv.innerHTML = `
+                    <div class="response success">
+                        <h3>✅ SUCCESS!</h3>
+                        <p><strong>AI Response:</strong></p>
+                        <pre>${data.response || data.message || 'No response field'}</pre>
+                        <p><strong>Service:</strong> ${data.service || 'Not specified'}</p>
+                        <p><strong>Usage:</strong> ${JSON.stringify(data.usage || {})}</p>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('Test error:', error);
+                resultsDiv.innerHTML = `
+                    <div class="response error">
+                        <h3>❌ ERROR</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p>Check the console for more details.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        async function testAI2() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="response">🔄 Testing emergency AI...</div>';
+            
+            try {
+                const response = await fetch('/api/ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        mode: 'personal',
+                        user: {
+                            name: 'Test User',
+                            role: 'member',
+                            location: 'Test Location'
+                        },
+                        message: 'What should I do in a fire emergency?',
+                        isEmergency: true
+                    })
+                });
+                
+                const data = await response.json();
+                
+                resultsDiv.innerHTML = `
+                    <div class="response success">
+                        <h3>✅ EMERGENCY AI TEST SUCCESS!</h3>
+                        <p><strong>AI Response:</strong></p>
+                        <pre>${data.response || data.message || 'No response field'}</pre>
+                    </div>
+                `;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="response error">
+                        <h3>❌ EMERGENCY TEST ERROR</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

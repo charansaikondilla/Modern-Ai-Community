@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔍 AI Debug Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background: #e8f5e8; border-color: #4caf50; }
+        .error { background: #ffebee; border-color: #f44336; }
+        .info { background: #e3f2fd; border-color: #2196f3; }
+        button { padding: 10px 20px; margin: 5px; background: #2196f3; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #1976d2; }
+        .log { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; font-family: monospace; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
+        .status { display: inline-block; padding: 5px 10px; border-radius: 15px; color: white; font-weight: bold; }
+        .online { background: #4caf50; }
+        .offline { background: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 AI System Debug Dashboard</h1>
+        <p>This page will diagnose exactly why your AI is not responding.</p>
+
+        <!-- Server Status -->
+        <div class="test-section info">
+            <h3>📡 Server Status</h3>
+            <p>Server: <span id="serverStatus" class="status offline">Checking...</span></p>
+            <p>AI Endpoint: <span id="aiStatus" class="status offline">Checking...</span></p>
+            <button onclick="checkServerStatus()">🔄 Check Server</button>
+        </div>
+
+        <!-- AI API Test -->
+        <div class="test-section">
+            <h3>🤖 AI API Direct Test</h3>
+            <button onclick="testAIAPI()">🧪 Test AI API</button>
+            <button onclick="testEmergencyAI()">🚨 Test Emergency AI</button>
+            <div id="apiResults" class="log">Click test buttons to check AI API...</div>
+        </div>
+
+        <!-- Frontend Integration Test -->
+        <div class="test-section">
+            <h3>🌐 Frontend Integration Test</h3>
+            <button onclick="simulateFrontend()">🖥️ Simulate Main App AI Call</button>
+            <div id="frontendResults" class="log">Click to test frontend integration...</div>
+        </div>
+
+        <!-- Network Test -->
+        <div class="test-section">
+            <h3>🌐 Network Diagnostic</h3>
+            <button onclick="networkTest()">📡 Test Network Connectivity</button>
+            <div id="networkResults" class="log">Click to test network connectivity...</div>
+        </div>
+
+        <!-- Environment Check -->
+        <div class="test-section">
+            <h3>🔧 Environment Check</h3>
+            <button onclick="envCheck()">⚙️ Check Environment</button>
+            <div id="envResults" class="log">Click to check environment variables...</div>
+        </div>
+
+        <!-- Real-time Logs -->
+        <div class="test-section">
+            <h3>📊 Real-time Debug Log</h3>
+            <div id="debugLog" class="log">Debug information will appear here...</div>
+            <button onclick="clearLog()">🗑️ Clear Log</button>
+        </div>
+    </div>
+
+    <script>
+        let debugLog = document.getElementById('debugLog');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : 'ℹ️';
+            debugLog.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+            debugLog.scrollTop = debugLog.scrollHeight;
+        }
+
+        function clearLog() {
+            debugLog.textContent = '';
+        }
+
+        async function checkServerStatus() {
+            log('Checking server status...');
+            
+            try {
+                // Test main server
+                const response = await fetch('/', { method: 'HEAD' });
+                const serverEl = document.getElementById('serverStatus');
+                if (response.ok) {
+                    serverEl.textContent = 'Online';
+                    serverEl.className = 'status online';
+                    log('Main server is online', 'success');
+                } else {
+                    serverEl.textContent = 'Error';
+                    serverEl.className = 'status offline';
+                    log('Main server returned error: ' + response.status, 'error');
+                }
+
+                // Test AI endpoint
+                const aiResponse = await fetch('/api/ai/health');
+                const aiEl = document.getElementById('aiStatus');
+                if (aiResponse.ok) {
+                    const data = await aiResponse.json();
+                    aiEl.textContent = 'Online';
+                    aiEl.className = 'status online';
+                    log('AI endpoint is online: ' + JSON.stringify(data), 'success');
+                } else {
+                    aiEl.textContent = 'Error';
+                    aiEl.className = 'status offline';
+                    log('AI endpoint error: ' + aiResponse.status, 'error');
+                }
+
+            } catch (error) {
+                log('Server check failed: ' + error.message, 'error');
+                document.getElementById('serverStatus').textContent = 'Offline';
+                document.getElementById('aiStatus').textContent = 'Offline';
+            }
+        }
+
+        async function testAIAPI() {
+            log('Testing AI API...');
+            const resultsDiv = document.getElementById('apiResults');
+            
+            try {
+                const testData = {
+                    mode: 'personal',
+                    user: {
+                        name: 'Debug User',
+                        role: 'member',
+                        location: 'Test Location'
+                    },
+                    message: 'Hello AI, please respond with emergency information',
+                    isEmergency: false
+                };
+
+                log('Sending AI request: ' + JSON.stringify(testData));
+                
+                const response = await fetch('/api/ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                log('AI API Response status: ' + response.status + ' ' + response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                log('AI API Response received', 'success');
+                
+                resultsDiv.innerHTML = \`
+                    <strong>✅ AI API SUCCESS!</strong>
+                    <pre>Status: \${response.status}
+Response Field: \${data.response ? 'Present' : 'Missing'}
+Message Field: \${data.message ? 'Present' : 'Missing'}
+Service: \${data.service || 'Not specified'}
+Mode: \${data.mode || 'Not specified'}
+
+Full Response:
+\${JSON.stringify(data, null, 2)}</pre>
+                \`;
+                
+            } catch (error) {
+                log('AI API test failed: ' + error.message, 'error');
+                resultsDiv.innerHTML = \`
+                    <strong>❌ AI API FAILED!</strong>
+                    <pre>Error: \${error.message}
+                    
+This indicates a connection or server issue.
+Check if the server is running on port 3006.</pre>
+                \`;
+            }
+        }
+
+        async function testEmergencyAI() {
+            log('Testing emergency AI response...');
+            
+            try {
+                const response = await fetch('/api/ai', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        mode: 'personal',
+                        user: { name: 'Emergency Test', role: 'member' },
+                        message: 'What should I do in a fire emergency?',
+                        isEmergency: true
+                    })
+                });
+
+                const data = await response.json();
+                log('Emergency AI response received: ' + (data.response || data.message)?.substring(0, 100) + '...', 'success');
+                
+            } catch (error) {
+                log('Emergency AI test failed: ' + error.message, 'error');
+            }
+        }
+
+        async function simulateFrontend() {
+            log('Simulating main app AI call...');
+            const resultsDiv = document.getElementById('frontendResults');
+            
+            try {
+                // Simulate exactly what the main app does
+                const context = {
+                    mode: 'personal',
+                    user: {
+                        name: 'Simulated User',
+                        role: 'member',
+                        location: 'Test Address'
+                    },
+                    isEmergency: false,
+                    message: 'give me about emergencies response'
+                };
+
+                log('Frontend simulation - sending context: ' + JSON.stringify(context));
+
+                const response = await fetch('/api/ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(context)
+                });
+
+                log('Frontend simulation - response status: ' + response.status);
+
+                if (!response.ok) {
+                    throw new Error('AI service unavailable');
+                }
+
+                const aiResponse = await response.json();
+                log('Frontend simulation - response received', 'success');
+
+                // Simulate frontend processing
+                const content = aiResponse.message || 'No message field found';
+                
+                resultsDiv.innerHTML = \`
+                    <strong>✅ FRONTEND SIMULATION SUCCESS!</strong>
+                    <pre>This is exactly what your main app should receive:
+
+Content that would display: 
+\${content}
+
+Response object:
+\${JSON.stringify(aiResponse, null, 2)}</pre>
+                \`;
+
+            } catch (error) {
+                log('Frontend simulation failed: ' + error.message, 'error');
+                resultsDiv.innerHTML = \`
+                    <strong>❌ FRONTEND SIMULATION FAILED!</strong>
+                    <pre>Error: \${error.message}</pre>
+                \`;
+            }
+        }
+
+        async function networkTest() {
+            log('Testing network connectivity...');
+            const resultsDiv = document.getElementById('networkResults');
+            
+            const tests = [
+                { name: 'Localhost 3006', url: 'http://localhost:3006' },
+                { name: 'AI Health Check', url: '/api/ai/health' },
+                { name: 'Static File', url: '/style.css' }
+            ];
+
+            let results = 'Network Test Results:\\n\\n';
+            
+            for (const test of tests) {
+                try {
+                    const response = await fetch(test.url, { method: 'HEAD' });
+                    results += \`✅ \${test.name}: \${response.status} \${response.statusText}\\n\`;
+                    log(\`Network test - \${test.name}: \${response.status}\`, 'success');
+                } catch (error) {
+                    results += \`❌ \${test.name}: \${error.message}\\n\`;
+                    log(\`Network test - \${test.name}: \${error.message}\`, 'error');
+                }
+            }
+            
+            resultsDiv.innerHTML = \`<pre>\${results}</pre>\`;
+        }
+
+        async function envCheck() {
+            log('Checking environment configuration...');
+            const resultsDiv = document.getElementById('envResults');
+            
+            try {
+                const response = await fetch('/api/ai/health');
+                const data = await response.json();
+                
+                resultsDiv.innerHTML = \`
+                    <pre>Environment Check:
+                    
+Server Status: \${data.status || 'Unknown'}
+AI Service: \${data.aiService || 'Unknown'}
+Timestamp: \${data.timestamp || 'Unknown'}
+
+This indicates your server environment is: \${response.ok ? '✅ Working' : '❌ Not Working'}</pre>
+                \`;
+                
+                log('Environment check completed', 'success');
+                
+            } catch (error) {
+                resultsDiv.innerHTML = \`<pre>❌ Environment check failed: \${error.message}</pre>\`;
+                log('Environment check failed: ' + error.message, 'error');
+            }
+        }
+
+        // Auto-run initial checks
+        setTimeout(() => {
+            log('🚀 Starting automatic diagnostics...');
+            checkServerStatus();
+        }, 1000);
+    </script>
+</body>
+</html>
